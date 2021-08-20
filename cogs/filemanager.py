@@ -7,10 +7,13 @@ traffic_file_nm = "trafficch.txt"
 
 class Filemanager(commands.Cog):
     def __init__(self, bot):
+        """
+        실행하며 필요한 파일들은 paffy_lib로.
+        """
         self.bot = bot
         self.config = jsr.get("config.json")
 
-    # lib 폴더에 길드생성->traffic채널 id 저장
+    # lib 폴더에 길드생성 -> traffic채널 id 저장
     @commands.Cog.listener()
     async def on_message(self, message):
         serverid = message.guild.id

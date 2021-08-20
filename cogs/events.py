@@ -9,6 +9,9 @@ from modules import jsonreader as jsr
 
 class Events(commands.Cog):
     def __init__(self, bot):
+        """
+        봇의 초기상태를 설정하는 모듈.
+        """
         self.bot = bot
         self.config = jsr.get("config.json")
         self.process = psutil.Process(os.getpid())
