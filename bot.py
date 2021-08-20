@@ -13,6 +13,12 @@ bot = Bot(
     help_command=None
 )
 
+#needs
+path = "./paffy_lib"
+if not os.path.isdir(path):
+    os.mkdir(path)
+
+
 for name in ['cogs.'+file[:-3] for file in os.listdir("cogs") if file.endswith('.py')]:
     bot.load_extension(name)
     print(f"{name} Loaded.")

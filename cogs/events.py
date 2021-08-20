@@ -14,7 +14,6 @@ class Events(commands.Cog):
         self.config = jsr.get("config.json")
         self.process = psutil.Process(os.getpid())
 
-
     @commands.Cog.listener()
     async def on_command(self, ctx):
         try:
