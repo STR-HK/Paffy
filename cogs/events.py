@@ -9,9 +9,7 @@ from modules import jsonreader as jsr
 
 class Events(commands.Cog):
     def __init__(self, bot):
-        """
-        봇의 초기상태를 설정하는 모듈.
-        """
+        """봇의 초기상태를 설정하는 모듈."""
         self.bot = bot
         self.config = jsr.get("config.json")
         self.process = psutil.Process(os.getpid())
@@ -25,9 +23,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        """
-        The function that actiavtes when boot was completed
-        """
+        """The function that actiavtes when boot was completed"""
         if not hasattr(self.bot, 'uptime'):
             self.bot.uptime = datetime.utcnow()
 
