@@ -23,7 +23,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        """The function that actiavtes when boot was completed"""
+        """봇 시작"""
         if not hasattr(self.bot, 'uptime'):
             self.bot.uptime = datetime.utcnow()
 

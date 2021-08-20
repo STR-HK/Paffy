@@ -7,9 +7,7 @@ traffic_file_nm = "trafficch.txt"
 
 class Filemanager(commands.Cog):
     def __init__(self, bot):
-        """
-        실행하며 필요한 파일들은 paffy_lib로.
-        """
+        """실행하며 필요한 파일들은 paffy_lib로."""
         self.bot = bot
         self.config = jsr.get("config.json")
 
