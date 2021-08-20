@@ -10,7 +10,7 @@ class Filemanager(commands.Cog):
         self.bot = bot
         self.config = jsr.get("config.json")
 
-    # Commands
+    # lib 폴더에 길드생성->traffic채널 id 저장
     @commands.Cog.listener()
     async def on_message(self, message):
         serverid = message.guild.id
