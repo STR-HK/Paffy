@@ -38,11 +38,12 @@ class Traffic(commands.Cog):
                 try:
                     await msg.add_reaction("✅")
                     await self.bot.wait_for('raw_reaction_add', timeout=10.0, check=reaction_check)
-                    await ctx.reply(f"시간초과asdasdasdasd.", mention_author=False)
+                    await ctx.reply("시간초과asdasdasdasd.", mention_author=False)
 
-                except:
+                except Exception as e:
+                    print(f'Error: {e}')
                     await msg.delete()
-                    await ctx.reply(f"시간초과.", mention_author=False)
+                    await ctx.reply("시간초과.", mention_author=False)
 
         else:
             await ctx.reply("필요한 파일이 아직 생성되지 않았습니다.", mention_author=False)
