@@ -1,6 +1,7 @@
 from discord.ext import commands
 from modules import jsonreader as jsr
 import os
+import discord
 
 path = "./paffy_lib/"
 traffic_file_nm = "trafficch.txt"
@@ -55,6 +56,10 @@ class Traffic(commands.Cog):
 
         else:
             await ctx.reply("대상이 채널이 아닙니다.", mention_author=False)
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        print(member.id)
 
 
 def setup(bot):
