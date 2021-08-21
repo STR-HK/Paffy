@@ -1,7 +1,6 @@
 from discord.ext import commands
 from modules import jsonreader as jsr
 import os
-import discord
 
 path = "./paffy_lib/"
 traffic_file_nm = "trafficch.txt"
