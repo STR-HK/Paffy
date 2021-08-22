@@ -21,7 +21,7 @@ class Traffic(commands.Cog):
     async def traffic(self, ctx, channelid: str):
         if channelid[:2] == "<#":
             channelid = channelid[2:][:-1]
-            if os.self.config.path.isfile(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}"):
+            if os.path.isfile(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}"):
                 f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}", 'r')
                 contents = f.read()
                 f.close()
@@ -76,7 +76,7 @@ class Traffic(commands.Cog):
     @commands.command(aliases=["트래픽세팅", "트래픽설정"])
     @has_permissions(manage_guild=True)
     async def traffic_set(self, ctx):
-        if os.self.config.path.isfile(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}"):
+        if os.path.isfile(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}"):
             array = []
             for i in range(0, 4):
                 f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[i]}.txt", 'r')
@@ -187,7 +187,7 @@ class Traffic(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        if os.self.config.path.isfile(f"{self.config.path}{member.guild.id}/{self.config.traffic_file_nm}"):
+        if os.path.isfile(f"{self.config.path}{member.guild.id}/{self.config.traffic_file_nm}"):
             f = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_file_nm}", 'r')
             contents = f.read()
             f.close()
