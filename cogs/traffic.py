@@ -1,6 +1,9 @@
+import discord
 from discord.ext import commands
 from modules import jsonreader as jsr
 import os
+
+import datetime
 
 path = "./paffy_lib/"
 traffic_file_nm = "trafficch.txt"
@@ -58,7 +61,26 @@ class Traffic(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        print(member.id)
+        if os.path.isfile(f"{path}{member.guild.id}/{traffic_file_nm}"):
+            f = open(f"{path}{member.guild.id}/{traffic_file_nm}", 'r')
+            contents = f.read()
+            f.close()
+            if contents != "0":
+                channel = discord.utils.get(member.guild.channels, id=int(contents))
+                embed = discord.Embed(
+                    title = f"{member.guild.name}에 온 것을 환영합니다",
+                    description = f"{member.display_name}이(가) {member.guild.name}에 떨어졌습니다.",
+                    timestamp = datetime.datetime.utcnow(),
+                    color = 0xFA747D
+                )
+                embed.set_author(
+                    name = member, 
+                    icon_url = member.avatar_url
+                )
+                embed.set_thumbnail(
+                    url = member.guild.icon_url
+                )
+                await channel.send(embed=embed)
 
 
 def setup(bot):

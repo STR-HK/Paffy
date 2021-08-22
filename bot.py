@@ -1,4 +1,5 @@
 import os
+import discord
 
 from modules import jsonreader as jsr
 from modules.bot import Bot
@@ -6,11 +7,14 @@ from modules.bot import Bot
 config = jsr.get("config.json")
 print("Logging in...")
 
+intents = discord.Intents.all()
+
 bot = Bot(
     command_prefix=config.prefix,
     prefix=config.prefix,
     command_attrs=dict(hidden=True),
-    help_command=None
+    help_command=None,
+    intents=intents
 )
 
 #needs
