@@ -43,6 +43,7 @@ class Traffic(commands.Cog):
                     else:
                         f = open(f"{path}{ctx.guild.id}/{traffic_file_nm}", 'r')
                         msg = await ctx.reply(f"기존에 설정된 채널은 <#{f.read()}>입니다. 바꾸시겠습니까?", mention_author=False)
+                        f.close()
 
                         def reaction_check(m):
                             if m.message_id == msg.id and m.user_id == ctx.author.id and str(m.emoji) == "✅":
@@ -52,7 +53,15 @@ class Traffic(commands.Cog):
                         try:
                             await msg.add_reaction("✅")
                             await self.bot.wait_for('raw_reaction_add', timeout=10.0, check=reaction_check)
-                            await ctx.reply("ss", mention_author=False)
+
+                            try:
+                                f = open(f"{path}{ctx.guild.id}/{traffic_file_nm}", 'w')
+                                f.write(channelid)
+                                f.close()
+                                await ctx.reply("수정되었습니다.", mention_author=False)
+
+                            except asyncio.TimeoutError:
+                                await ctx.reply("시간초과입니다.", mention_author=False)
 
                         except asyncio.TimeoutError:
                             await msg.delete()
