@@ -5,6 +5,7 @@ import os
 path = "./paffy_lib/"
 traffic_file_nm = "trafficch.txt"
 
+
 class Filemanager(commands.Cog):
     def __init__(self, bot):
         """실행하며 필요한 파일들은 paffy_lib로."""

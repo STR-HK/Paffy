@@ -75,17 +75,17 @@ class Traffic(commands.Cog):
             if contents != "0":
                 channel = discord.utils.get(member.guild.channels, id=int(contents))
                 embed = discord.Embed(
-                    title = f"{member.guild.name}에 온 것을 환영합니다",
-                    description = f"{member.display_name}이(가) {member.guild.name}에 떨어졌습니다.",
-                    timestamp = datetime.datetime.utcnow(),
-                    color = 0xFA747D
+                    title=f"{member.guild.name}에 온 것을 환영합니다",
+                    description=f"{member.display_name}이(가) {member.guild.name}에 떨어졌습니다.",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0xFA747D
                 )
                 embed.set_author(
-                    name = member, 
-                    icon_url = member.avatar_url
+                    name=member,
+                    icon_url=member.avatar_url
                 )
                 embed.set_thumbnail(
-                    url = member.guild.icon_url
+                    url=member.guild.icon_url
                 )
                 await channel.send(embed=embed)
 
