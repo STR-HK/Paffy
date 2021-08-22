@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands import has_permissions, MissingPermissions
 from modules import jsonreader as jsr
 import os
 
@@ -17,6 +18,7 @@ class Traffic(commands.Cog):
 
     # lib 폴더에 길드생성 -> traffic채널 id 저장
     @commands.command(aliases=["트래픽", "joinmessage"])
+    @has_permissions(manage_guild=True)
     async def traffic(self, ctx, channelid: str):
         if channelid[:2] == "<#":
             channelid = channelid[2:][:-1]
@@ -46,7 +48,7 @@ class Traffic(commands.Cog):
                         try:
                             await msg.add_reaction("✅")
                             await self.bot.wait_for('raw_reaction_add', timeout=10.0, check=reaction_check)
-                            await ctx.reply("시간초과asdasdasdasd.", mention_author=False)
+                            await ctx.reply("ss", mention_author=False)
 
                         except Exception as e:
                             print(f'Error: {e}')
@@ -58,6 +60,11 @@ class Traffic(commands.Cog):
 
         else:
             await ctx.reply("대상이 채널이 아닙니다.", mention_author=False)
+
+    @traffic.error
+    async def traffic_error(self, ctx, error):
+        if isinstance(error, MissingPermissions):
+            await ctx.reply("**Manage Server** 권한이 필요합니다.", mention_author=False)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
