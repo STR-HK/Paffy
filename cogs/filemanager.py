@@ -33,10 +33,10 @@ class Filemanager(commands.Cog):
                 f.write("1")
                 f.close()
             f = open(f"{path}{serverid}/{traffic_s_folder}/{SvI[2]}.txt", 'w')
-            f.write("{member.guild.name}에 오신 것을 환영합니다!")
+            f.write("{{GuildName}}에 오신 것을 환영합니다!")
             f.close()
             f = open(f"{path}{serverid}/{traffic_s_folder}/{SvI[3]}.txt", 'w')
-            f.write("{member.display_name} 은/는 {member.guild.name}의 {len(member.guild.members)}번째 손님입니다!")
+            f.write("{{UserName}} 은/는 {{GuildName}}의 {{Counts}}번째 손님입니다!")
             f.close()
 
 

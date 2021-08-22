@@ -204,16 +204,22 @@ class Traffic(commands.Cog):
                 title = open(f"{path}{member.guild.id}/{traffic_s_folder}/{SvI[2]}.txt", 'r')
                 text = open(f"{path}{member.guild.id}/{traffic_s_folder}/{SvI[3]}.txt", 'r')
 
+                def replacer(give):
+                    give = give.replace('{{GuildName}}', member.guild.name).\
+                        replace('{{UserName}}',member.display_name).replace(
+                        '{{Counts}}', str(len(member.guild.members)))
+                    return give
+
                 embed = discord.Embed(
-                    title=f"{title.read()}",
-                    description=f"{text.read()}",
+                    title=replacer(title.read()),
+                    description=replacer(text.read()),
                     color=0xFA747D
                 )
-                if servericon == "1":
+                if servericon.read() == "1":
                     embed.set_thumbnail(
                         url=member.guild.icon_url
                     )
-                if timestamp == "1":
+                if timestamp.read() == "1":
                     embed.timestamp = datetime.datetime.utcnow()
 
                 embed.set_author(
