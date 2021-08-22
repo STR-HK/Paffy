@@ -23,9 +23,11 @@ if not os.path.isdir(path):
     os.mkdir(path)
 
 
-for name in ['cogs.'+file[:-3] for file in os.listdir("cogs") if file.endswith('.py')]:
-    bot.load_extension(name)
-    print(f"{name} Loaded.")
+for a,b,files in os.walk("cogs"):
+    for name in files:
+        if name.endswith('.py'):
+            bot.load_extension(f"cogs.{name[:-3]}")
+            print(f"{name} Loaded.")
 
 try:
     bot.run(config.token)
