@@ -3,7 +3,6 @@ from modules import jsonreader as jsr
 import os
 
 path = "./paffy_lib/"
-traffic_file_nm = "trafficch.txt"
 
 
 class Filemanager(commands.Cog):
@@ -18,10 +17,6 @@ class Filemanager(commands.Cog):
         serverid = message.guild.id
         if not os.path.isdir(f"{path}{serverid}"):
             os.mkdir(f"{path}{serverid}")
-        if not os.path.isfile(f"{path}{serverid}/{traffic_file_nm}"):
-            f = open(f"{path}{serverid}/{traffic_file_nm}", 'w')
-            f.write("0")
-            f.close()
 
 
 def setup(bot):
