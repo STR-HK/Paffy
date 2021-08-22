@@ -167,7 +167,7 @@ class Traffic(commands.Cog):
                             array[i] = "❌"
                 liww = "\n\n"
                 embed = discord.Embed(
-                    title="무엇을 수정하시겠습니까?",
+                    title="수정된 결과입니다.",
                     description=f"1. ServerIcon: {array[0]}{liww}2. TimeStamp: {array[1]}{liww}"
                                 f"3. Title: {array[2]}{liww}4. Text: {array[3]}",
                     timestamp=datetime.datetime.utcnow(),
