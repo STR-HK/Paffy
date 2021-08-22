@@ -71,7 +71,7 @@ class Traffic(commands.Cog):
 
     @commands.command(aliases=["트래픽세팅", "트래픽설정"])
     @has_permissions(manage_guild=True)
-    async def traffic_s(self, ctx):
+    async def traffic_set(self, ctx):
         if os.path.isfile(f"{path}{ctx.guild.id}/{traffic_file_nm}"):
             array = []
             for i in range(0, 4):
@@ -176,7 +176,7 @@ class Traffic(commands.Cog):
         else:
             await ctx.reply("필요한 파일이 아직 생성되지 않았습니다. 다시 시도해주세요.", mention_author=False)
 
-    @traffic_s.error
+    @traffic_set.error
     async def traffic_s_error(self, ctx, error):
         if isinstance(error, MissingPermissions):
             await ctx.reply("**Manage Server** 권한이 필요합니다.", mention_author=False)
