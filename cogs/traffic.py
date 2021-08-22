@@ -196,8 +196,10 @@ class Traffic(commands.Cog):
 
                 servericon = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[0]}.txt", 'r')
                 timestamp = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[1]}.txt", 'r')
-                title = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[2]}.txt", 'r')
-                text = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[3]}.txt", 'r')
+                title = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/"
+                             f"{self.config.SvI[2]}.txt", 'r')
+                text = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/"
+                            f"{self.config.SvI[3]}.txt", 'r')
 
                 def replacer(give):
                     give = give.replace('{{GuildName}}', member.guild.name).\
