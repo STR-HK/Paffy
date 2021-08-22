@@ -8,11 +8,6 @@ import os
 
 import datetime
 
-path = "./paffy_lib/"
-traffic_file_nm = "trafficch.txt"
-traffic_s_folder = "traffic_s"
-SvI = ["ServerIcon", "TimeStamp", "Title", "Text"]
-
 
 class Traffic(commands.Cog):
     def __init__(self, bot):
@@ -26,12 +21,12 @@ class Traffic(commands.Cog):
     async def traffic(self, ctx, channelid: str):
         if channelid[:2] == "<#":
             channelid = channelid[2:][:-1]
-            if os.path.isfile(f"{path}{ctx.guild.id}/{traffic_file_nm}"):
-                f = open(f"{path}{ctx.guild.id}/{traffic_file_nm}", 'r')
+            if os.self.config.path.isfile(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}"):
+                f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}", 'r')
                 contents = f.read()
                 f.close()
                 if contents == "0":
-                    f = open(f"{path}{ctx.guild.id}/{traffic_file_nm}", 'w')
+                    f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}", 'w')
                     f.write(channelid)
                     f.close()
                     await ctx.reply("설정되었습니다.", mention_author=False)
@@ -41,7 +36,7 @@ class Traffic(commands.Cog):
                         await ctx.reply("기존의 채널과 겹칩니다.", mention_author=False)
 
                     else:
-                        f = open(f"{path}{ctx.guild.id}/{traffic_file_nm}", 'r')
+                        f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}", 'r')
                         msg = await ctx.reply(f"기존에 설정된 채널은 <#{f.read()}>입니다. 바꾸시겠습니까?", mention_author=False)
                         f.close()
 
@@ -55,7 +50,7 @@ class Traffic(commands.Cog):
                             await self.bot.wait_for('raw_reaction_add', timeout=10.0, check=reaction_check)
 
                             try:
-                                f = open(f"{path}{ctx.guild.id}/{traffic_file_nm}", 'w')
+                                f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}", 'w')
                                 f.write(channelid)
                                 f.close()
                                 await ctx.reply("수정되었습니다.", mention_author=False)
@@ -81,10 +76,10 @@ class Traffic(commands.Cog):
     @commands.command(aliases=["트래픽세팅", "트래픽설정"])
     @has_permissions(manage_guild=True)
     async def traffic_set(self, ctx):
-        if os.path.isfile(f"{path}{ctx.guild.id}/{traffic_file_nm}"):
+        if os.self.config.path.isfile(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_file_nm}"):
             array = []
             for i in range(0, 4):
-                f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[i]}.txt", 'r')
+                f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[i]}.txt", 'r')
                 array.append(f.read())
                 f.close()
                 if i < 2:
@@ -113,34 +108,34 @@ class Traffic(commands.Cog):
                 if msgt.content == "1":
                     await ctx.send("수정되었습니다.")
                     await msg.delete()
-                    f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[0]}.txt", 'r')
+                    f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[0]}.txt", 'r')
                     if f.read() == "1":
                         f.close()
-                        f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[0]}.txt", 'w')
+                        f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[0]}.txt", 'w')
                         f.write("0")
                         f.close()
                     else:
                         f.close()
-                        f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[0]}.txt", 'w')
+                        f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[0]}.txt", 'w')
                         f.write("1")
                         f.close()
                 elif msgt.content == "2":
-                    f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[1]}.txt", 'r')
+                    f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[1]}.txt", 'r')
                     if f.read() == "1":
                         f.close()
-                        f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[1]}.txt", 'w')
+                        f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[1]}.txt", 'w')
                         f.write("0")
                         f.close()
                     else:
                         f.close()
-                        f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[1]}.txt", 'w')
+                        f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[1]}.txt", 'w')
                         f.write("1")
                         f.close()
                 elif msgt.content == "3":
                     try:
                         await ctx.send("입력해주세요. ")
                         msge = await self.bot.wait_for("message", timeout=40.0, check=check)
-                        f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[2]}.txt", 'w')
+                        f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[2]}.txt", 'w')
                         f.write(msge.content)
                         f.close()
                     except asyncio.TimeoutError:
@@ -149,7 +144,7 @@ class Traffic(commands.Cog):
                     try:
                         await ctx.send("입력해주세요.")
                         msge = await self.bot.wait_for("message", timeout=40.0, check=check)
-                        f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[3]}.txt", 'w')
+                        f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[3]}.txt", 'w')
                         f.write(msge.content)
                         f.close()
                     except asyncio.TimeoutError:
@@ -157,7 +152,7 @@ class Traffic(commands.Cog):
 
                 array = []
                 for i in range(0, 4):
-                    f = open(f"{path}{ctx.guild.id}/{traffic_s_folder}/{SvI[i]}.txt", 'r')
+                    f = open(f"{self.config.path}{ctx.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[i]}.txt", 'r')
                     array.append(f.read())
                     f.close()
                     if i < 2:
@@ -192,17 +187,17 @@ class Traffic(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        if os.path.isfile(f"{path}{member.guild.id}/{traffic_file_nm}"):
-            f = open(f"{path}{member.guild.id}/{traffic_file_nm}", 'r')
+        if os.self.config.path.isfile(f"{self.config.path}{member.guild.id}/{self.config.traffic_file_nm}"):
+            f = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_file_nm}", 'r')
             contents = f.read()
             f.close()
             if contents != "0":
                 channel = discord.utils.get(member.guild.channels, id=int(contents))
 
-                servericon = open(f"{path}{member.guild.id}/{traffic_s_folder}/{SvI[0]}.txt", 'r')
-                timestamp = open(f"{path}{member.guild.id}/{traffic_s_folder}/{SvI[1]}.txt", 'r')
-                title = open(f"{path}{member.guild.id}/{traffic_s_folder}/{SvI[2]}.txt", 'r')
-                text = open(f"{path}{member.guild.id}/{traffic_s_folder}/{SvI[3]}.txt", 'r')
+                servericon = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[0]}.txt", 'r')
+                timestamp = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[1]}.txt", 'r')
+                title = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[2]}.txt", 'r')
+                text = open(f"{self.config.path}{member.guild.id}/{self.config.traffic_s_folder}/{self.config.SvI[3]}.txt", 'r')
 
                 def replacer(give):
                     give = give.replace('{{GuildName}}', member.guild.name).\

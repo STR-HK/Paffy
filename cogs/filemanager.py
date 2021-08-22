@@ -2,11 +2,6 @@ from discord.ext import commands
 from modules import jsonreader as jsr
 import os
 
-path = "./paffy_lib/"
-traffic_file_nm = "trafficch.txt"
-traffic_s_folder = "traffic_s"
-SvI = ["ServerIcon", "TimeStamp", "Title", "Text"]
-
 
 class Filemanager(commands.Cog):
     def __init__(self, bot):
@@ -18,24 +13,24 @@ class Filemanager(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         serverid = message.guild.id
-        if not os.path.isdir(f"{path}{serverid}"):
-            os.mkdir(f"{path}{serverid}")
+        if not os.path.isdir(f"{self.config.path}{serverid}"):
+            os.mkdir(f"{self.config.path}{serverid}")
 
-        if not os.path.isfile(f"{path}{serverid}/{traffic_file_nm}"):
-            f = open(f"{path}{serverid}/{traffic_file_nm}", 'w')
+        if not os.path.isfile(f"{self.config.path}{serverid}/{self.config.traffic_file_nm}"):
+            f = open(f"{self.config.path}{serverid}/{self.config.traffic_file_nm}", 'w')
             f.write("0")
             f.close()
 
-        if not os.path.isdir(f"{path}{serverid}/{traffic_s_folder}"):
-            os.mkdir(f"{path}{serverid}/{traffic_s_folder}")
+        if not os.path.isdir(f"{self.config.path}{serverid}/{self.config.traffic_s_folder}"):
+            os.mkdir(f"{self.config.path}{serverid}/{self.config.traffic_s_folder}")
             for i in range(0, 2):
-                f = open(f"{path}{serverid}/{traffic_s_folder}/{SvI[i]}.txt", 'w')
+                f = open(f"{self.config.path}{serverid}/{self.config.traffic_s_folder}/{self.config.SvI[i]}.txt", 'w')
                 f.write("1")
                 f.close()
-            f = open(f"{path}{serverid}/{traffic_s_folder}/{SvI[2]}.txt", 'w')
+            f = open(f"{self.config.path}{serverid}/{self.config.traffic_s_folder}/{self.config.SvI[2]}.txt", 'w')
             f.write("{{GuildName}}에 오신 것을 환영합니다!")
             f.close()
-            f = open(f"{path}{serverid}/{traffic_s_folder}/{SvI[3]}.txt", 'w')
+            f = open(f"{self.config.path}{serverid}/{self.config.traffic_s_folder}/{self.config.SvI[3]}.txt", 'w')
             f.write("{{UserName}} 은/는 {{GuildName}}의 {{Counts}}번째 손님입니다!")
             f.close()
 
