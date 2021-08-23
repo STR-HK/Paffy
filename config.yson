@@ -10,6 +10,7 @@
   "playing": "PARFAIT V",
   "playing_type": "playing|watching|listening",
   "status_type": "online|idle|dnd",
+  "wolframapi": "",
   "path": "./paffy_lib/",
   "traffic_file_nm": "trafficch.txt",
   "traffic_s_folder": "traffic_s",
