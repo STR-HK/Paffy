@@ -18,14 +18,18 @@ class Wolframalpha(commands.Cog):
             resarray = []
             for pod in res.pods:
                 for sub in pod.subpods:
-                    resarray.append(str(sub.img)[10:str(sub.img).find("'", 11)])
+                    if not str(sub.plaintext) == "None":
+                        resarray.append(str(sub.plaintext))
 
         except Exception as e:
             await ctx.reply(f"에러가 발생했어요. {e}", mention_author=False)
             return
 
-        for i in range(1, len(resarray)):
-            await ctx.send(resarray[i])
+        msg = ""
+        for i in range(0,len(resarray)):
+            msg = msg+resarray[i]+"\n"
+
+        await ctx.reply(msg,mention_author=False)
 
 
 def setup(bot):
